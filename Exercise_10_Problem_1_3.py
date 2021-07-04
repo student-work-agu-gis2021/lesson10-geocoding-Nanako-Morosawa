@@ -56,7 +56,7 @@ geodata=geo.join(data)
 
 #TEST CODE
 # Check the join output
-print(geodata.head())
+print(geodata.head()) 
 
 
 # - Save the output as a Shapefile called `shopping_centers.shp` 
