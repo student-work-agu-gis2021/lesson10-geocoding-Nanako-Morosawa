@@ -27,7 +27,7 @@ from geopandas.tools import geocode
 
 # Geocode addresses using Nominatim. Remember to provide a custom "application name" in the user_agent parameter!
 #YOUR CODE HERE 2 for geocoding
-geo = geocode(data['addr'], provider='nominatim', user_agent='application name')
+geo = geocode(data['addr'], provider='nominatim', user_agent='autogis_xx')
 
 #TEST CODE  
 # Check the geocoded output
@@ -83,7 +83,7 @@ geodata['buffer']=None
 
 # YOUR CODE HERE 7 to set buffer column
 geodata['buffer'] = geodata['geometry'].buffer(distance=1500)
-
+ 
 #TEST CODE
 print(geodata.head())  
 
@@ -113,9 +113,16 @@ print(geodata.head())
 
 # YOUR CODE HERE 9
 # Read population grid data for 2018 into a variable `pop`. 
-read_pop = r'data/500m_mesh_suikei_2018_shape_13/500m_mesh_2018_13.shp'
-pop = gpd.read_file(read_pop)
-pop = pop[['PTN_2020', 'geometry']]
+import requests 
+import geojson
+url = 'https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-mesh500h30.html#prefecture13' 
+params = dict(service='WFS',version='2.0.0',request='GetFeature',
+              typeName='500m_mesh_2018_13.shp',outputFormat='json')
+r = requests.get(url, params=params)
+pop = gpd.GeoDataFrame.from_features(geojson.loads(r.content))
+pop = pop[[ 'geometry','PTN_2020' ]]
+pop.crs = CRS.from_epsg(4612).to_wkt()
+geodata = geodata.to_crs(pop.crs)
 
 #TEST CODE
 # Check your input data
@@ -128,16 +135,12 @@ print(pop.head(3))
 
 # Create a spatial join between grid layer and buffer layer. 
 # YOUR CDOE HERE 10 for spatial join
-pop.crs = CRS.from_epsg(32634).to_wkt()
+join = gpd.sjoin(geodata, pop, how="inner", op="intersects")
 
 # YOUR CODE HERE 11 to report how many people live within 1.5 km distance from each shopping center
-join = gpd.sjoin(geodata, pop, how = 'inner', op = 'intersects')
-grouped = join.groupby(['name'])
-sum=0.0
-for key, group in grouped:
-  sum=round(group['PTN_2020'].sum())
-print("the number of people who live within 1.5 km :", sum)
-
+grouped = join.groupby('name')
+for i, group in grouped:
+    print('store: ', i,'  ; population:', sum(group['PTN_2020']))
 
 # **Reflections:**
 #     
