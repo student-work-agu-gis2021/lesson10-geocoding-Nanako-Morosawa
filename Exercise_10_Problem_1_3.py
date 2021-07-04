@@ -29,7 +29,7 @@ from geopandas.tools import geocode
 #YOUR CODE HERE 2 for geocoding
 geo = geocode(data['addr'], provider='nominatim', user_agent='application name')
 
-#TEST CODE 
+#TEST CODE  
 # Check the geocoded output
 print(geo)
 
