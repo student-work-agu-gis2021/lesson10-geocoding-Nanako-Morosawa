@@ -85,7 +85,7 @@ geodata['buffer']=None
 geodata['buffer'] = geodata['geometry'].buffer(distance=1500)
 
 #TEST CODE
-print(geodata.head()) 
+print(geodata.head())  
 
 #TEST CODE
 # Check the data type of the first value in the buffer-column
