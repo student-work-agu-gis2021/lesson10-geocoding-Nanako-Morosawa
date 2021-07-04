@@ -10,6 +10,7 @@
 import geopandas as gpd
 import pandas as pd
 # Read the data (replace "None" with your own code)
+data=None
 # YOUR CODE HERE 1 to read the data
 data = pd.read_table('shopping_centers.txt', sep=';', header=None)
 data.columns=['id','name', 'addr']
@@ -26,7 +27,7 @@ from geopandas.tools import geocode
 
 # Geocode addresses using Nominatim. Remember to provide a custom "application name" in the user_agent parameter!
 #YOUR CODE HERE 2 for geocoding
-geo=geocode(data['addr'],provider='nominatim',user_agent='autogis_xx')
+geo=geocode(data['addr'],provider='nominatim',user_agent='application name')
 
 #TEST CODE  
 # Check the geocoded output
@@ -61,7 +62,7 @@ print(geodata.head())
 # Define output filepath
 out_fp = None
 # YOUR CODE HERE 5 to save the output
-out_fp = r'shopping_centers.shp'
+out_fp = r"shopping_centers.shp"
 geodata.to_file(out_fp)
 
 # TEST CODE
