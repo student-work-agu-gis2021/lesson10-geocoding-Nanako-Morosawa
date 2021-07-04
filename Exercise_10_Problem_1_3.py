@@ -53,7 +53,7 @@ print(geo.crs)
 
 # YOUR CODE HERE 4 to join the tables
 geodata=geo.join(data)
-
+ 
 #TEST CODE
 # Check the join output
 print(geodata.head()) 
@@ -64,8 +64,8 @@ print(geodata.head())
 # Define output filepath
 out_fp = None
 # YOUR CODE HERE 5 to save the output
-fp = 'shopping_centers.shp'
-geo.to_file(fp)
+out_fp = r'shopping_centers.shp'
+geodata.to_file(out_fp)
 
 # TEST CODE
 # Print info about output file
