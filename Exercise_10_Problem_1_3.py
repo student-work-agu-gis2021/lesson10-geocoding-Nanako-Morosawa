@@ -111,7 +111,7 @@ print(geodata.head())
 # Last step in our analysis is to make a spatial join between our buffer layer and population data in order to find out **how many people live near each shopping center**. 
 # 
 
-# YOUR CODE HERE 9
+# YOUR CODE HERE 9 
 # Read population grid data for 2018 into a variable `pop`.  
 import requests  
 import geojson   
