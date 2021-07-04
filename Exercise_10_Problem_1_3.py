@@ -116,7 +116,7 @@ print(geodata.head())
 import requests  
 import geojson  
 url =  'https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-mesh500h30.html#prefecture13' 
-params = dict(service='WFS',version='2.0.0',request='GetFeature',
+params = dict(service='WFS',version='2.0.0',request='GetFeature', 
               typeName='500m_mesh_2018_13.shp',outputFormat='json')
 r = requests.get(url, params=params)
 pop = gpd.GeoDataFrame.from_features(geojson.loads(r.content))
