@@ -32,7 +32,7 @@ geo = geocode(data['addr'], provider='nominatim', user_agent='application name')
 #TEST CODE  
 # Check the geocoded output
 print(geo)
-
+ 
 #TEST CODE
 # Check the data type (should be a GeoDataFrame!)
 print(type(geo))
