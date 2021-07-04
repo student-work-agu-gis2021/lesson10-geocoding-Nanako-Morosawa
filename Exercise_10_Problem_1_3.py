@@ -113,7 +113,7 @@ print(geodata.head())
 
 # YOUR CODE HERE 9
 # Read population grid data for 2018 into a variable `pop`. 
-import requests 
+import requests  
 import geojson 
 url = 'https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-mesh500h30.html#prefecture13' 
 params = dict(service='WFS',version='2.0.0',request='GetFeature',
